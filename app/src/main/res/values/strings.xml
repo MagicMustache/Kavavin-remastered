@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Kavavin</string>
+    <string name="myCellar">Ma cave</string>
+    <string name="searchDescription">Rechercher</string>
+    <string name="filterDescription">Filtrer</string>
+    <string name="sortDescription">Trier</string>
+    <string name="searchHint">Nom,cépage,région,etc…</string>
+    <string name="gcp_id">123093762404-6pll8urvadmrgdlockbquh209hb4ts15.apps.googleusercontent.com</string>
+</resources>
