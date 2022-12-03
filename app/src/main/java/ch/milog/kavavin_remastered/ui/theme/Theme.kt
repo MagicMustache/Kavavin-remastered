@@ -35,7 +35,7 @@ fun KavavinRemasteredTheme(
     content: @Composable () -> Unit
 ) {
     val systemUiController = rememberSystemUiController()
-    systemUiController.setSystemBarsColor(
+    systemUiController.setStatusBarColor(
         color = primary,
         darkIcons = false
     )
