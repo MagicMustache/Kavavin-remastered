@@ -1,5 +1,6 @@
 package ch.milog.kavavin_remastered.presentation.cellar
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -7,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import ch.milog.kavavin_remastered.domain.use_cases.CellarUseCases
 import ch.milog.kavavin_remastered.domain.utils.CellarOrder
 import ch.milog.kavavin_remastered.domain.utils.OrderType
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class CellarViewModel(private val cellarUseCases: CellarUseCases) : ViewModel() {
@@ -16,9 +16,7 @@ class CellarViewModel(private val cellarUseCases: CellarUseCases) : ViewModel() 
     val state: State<CellarState> = _state
 
     init {
-        viewModelScope.launch {
-            getBottles(CellarOrder.Quantity(OrderType.Descending))
-        }
+        getBottles(CellarOrder.Quantity(OrderType.Descending))
     }
 
     fun onEvent(event: CellarEvent) {
@@ -35,10 +33,20 @@ class CellarViewModel(private val cellarUseCases: CellarUseCases) : ViewModel() 
             is CellarEvent.BottleDeleted -> {
                 cellarUseCases.deleteBottle(event.bottle)
             }
+            is CellarEvent.Refresh -> {
+                getBottles(event.order)
+            }
         }
     }
 
     private fun getBottles(cellarOrder: CellarOrder) {
-        _state.value = _state.value.copy(bottles = cellarUseCases.getBottles.invoke(cellarOrder), cellarOrder = cellarOrder)
+        viewModelScope.launch {
+            val bottles = cellarUseCases.getBottles(cellarOrder)
+            Log.d("CellarViewModel", "getBottles: $bottles")
+            _state.value = CellarState(
+                bottles,
+                cellarOrder
+            )
+        }
     }
 }

@@ -3,7 +3,7 @@ package ch.milog.kavavin_remastered.domain.repository
 import ch.milog.kavavin_remastered.domain.model.Bottle
 
 interface BottleRepository {
-    fun getBottles(): List<Bottle>
+    suspend fun getBottles(): List<Bottle>
     fun insertBottle(bottle: Bottle)
     fun deleteBottle(bottle: Bottle)
     fun updateBottle(bottle: Bottle)

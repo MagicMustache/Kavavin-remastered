@@ -7,4 +7,5 @@ sealed class CellarEvent {
     data class OrderChanged(val order: CellarOrder) : CellarEvent()
     data class BottleDeleted(val bottle: Bottle) : CellarEvent()
     data class BottleUpdated(val bottle: Bottle) : CellarEvent()
+    data class Refresh(val order: CellarOrder) : CellarEvent()
 }
