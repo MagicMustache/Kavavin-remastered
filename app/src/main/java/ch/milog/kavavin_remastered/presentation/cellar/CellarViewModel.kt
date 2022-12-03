@@ -42,7 +42,6 @@ class CellarViewModel(private val cellarUseCases: CellarUseCases) : ViewModel() 
     private fun getBottles(cellarOrder: CellarOrder) {
         viewModelScope.launch {
             val bottles = cellarUseCases.getBottles(cellarOrder)
-            Log.d("CellarViewModel", "getBottles: $bottles")
             _state.value = CellarState(
                 bottles,
                 cellarOrder

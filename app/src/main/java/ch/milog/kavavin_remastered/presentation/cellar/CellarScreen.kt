@@ -15,6 +15,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import ch.milog.kavavin_remastered.presentation.cellar.components.BottleComponent
 import ch.milog.kavavin_remastered.presentation.cellar.components.TopAppBarComponent
@@ -32,10 +33,9 @@ fun CellarScreen(viewModel: CellarViewModel) {
     val navController = rememberNavController()
     var refreshing by remember { mutableStateOf(false) }
 
-    Log.d("bottles", state.bottles.toString())
     LaunchedEffect(refreshing) {
         if (refreshing) {
-            delay(1000)
+            delay(500)
             viewModel.onEvent(CellarEvent.Refresh(state.cellarOrder))
             refreshing = false
         }
@@ -66,9 +66,12 @@ fun CellarScreen(viewModel: CellarViewModel) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing = refreshing), onRefresh = { refreshing = true }) {
-                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    LazyColumn(modifier = Modifier
+                        .padding(8.dp, 0.dp)
+                        .fillMaxSize()) {
                         items(state.bottles) { bottle ->
                             BottleComponent(bottle)
+                            Divider()
                         }
                     }
                 }

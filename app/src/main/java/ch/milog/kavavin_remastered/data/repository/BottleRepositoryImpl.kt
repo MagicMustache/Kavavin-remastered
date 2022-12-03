@@ -18,7 +18,6 @@ class BottleRepositoryImpl : BottleRepository {
         return suspendCoroutine {
             val bottles = mutableListOf<Bottle>()
             if (currentUser != null) {
-                Log.d("user", currentUser.uid)
                 db.collection("bottles")
                     .whereEqualTo("userId", currentUser.uid)
                     .get()
@@ -30,23 +29,22 @@ class BottleRepositoryImpl : BottleRepository {
                                     bottles.add(
                                         Bottle(
                                             document.id,
-                                            bottle["type"] as Long?,
-                                            bottle["name"] as String?,
+                                            bottle["type"] as Long,
+                                            bottle["name"] as String,
                                             bottle["country"] as String?,
                                             bottle["region"] as String?,
                                             bottle["year"] as Long?,
                                             bottle["grape"] as String?,
                                             bottle["price"] as Long?,
                                             bottle["producer"] as String?,
-                                            bottle["quantity"] as Long?,
-                                            bottle["userId"] as String?
+                                            bottle["quantity"] as Long,
+                                            bottle["userId"] as String
                                         )
                                     )
                                 }
                             }
                         }
                         it.resumeWith(Result.success(bottles))
-                        Log.d("FIREBASE", "Bottles: $bottles")
                     }
                     .addOnFailureListener { exception ->
                         it.resumeWith(Result.success(bottles))

@@ -7,4 +7,6 @@
     <string name="searchHint">Nom,cépage,région,etc…</string>
     <string name="login">Connexion</string>
     <string name="gcp_id">123093762404-6pll8urvadmrgdlockbquh209hb4ts15.apps.googleusercontent.com</string>
+    <string name="bottle_image_description">Image de la bouteille</string>
+    <string name="bottle_name">%1$s (%2$s)</string>
 </resources>
