@@ -8,4 +8,5 @@ sealed class CellarEvent {
     data class BottleDeleted(val bottle: Bottle) : CellarEvent()
     data class BottleUpdated(val bottle: Bottle) : CellarEvent()
     data class Refresh(val order: CellarOrder) : CellarEvent()
+    data class FilteredBottles(val order: CellarOrder, val filter: Long?) : CellarEvent()
 }

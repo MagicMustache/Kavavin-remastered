@@ -6,7 +6,6 @@ import ch.milog.kavavin_remastered.domain.repository.BottleRepository
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.tasks.await
 import kotlin.coroutines.suspendCoroutine
 
 class BottleRepositoryImpl : BottleRepository {
@@ -14,9 +13,9 @@ class BottleRepositoryImpl : BottleRepository {
     private val db = Firebase.firestore
     val currentUser = Firebase.auth.currentUser
 
-    override suspend fun getBottles(): List<Bottle> {
+    override suspend fun getBottles(filter: Long?): List<Bottle> {
         return suspendCoroutine {
-            val bottles = mutableListOf<Bottle>()
+            var bottles = mutableListOf<Bottle>()
             if (currentUser != null) {
                 db.collection("bottles")
                     .whereEqualTo("userId", currentUser.uid)
@@ -43,6 +42,11 @@ class BottleRepositoryImpl : BottleRepository {
                                     )
                                 }
                             }
+                        }
+                        if (filter != null) {
+                            bottles = bottles.filter {
+                                it.type == filter
+                            }.toMutableList()
                         }
                         it.resumeWith(Result.success(bottles))
                     }

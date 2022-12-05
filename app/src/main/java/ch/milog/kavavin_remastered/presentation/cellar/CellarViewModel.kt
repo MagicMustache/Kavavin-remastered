@@ -1,6 +1,5 @@
 package ch.milog.kavavin_remastered.presentation.cellar
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -36,15 +35,19 @@ class CellarViewModel(private val cellarUseCases: CellarUseCases) : ViewModel() 
             is CellarEvent.Refresh -> {
                 getBottles(event.order)
             }
+            is CellarEvent.FilteredBottles -> {
+                getBottles(event.order, event.filter)
+            }
         }
     }
 
-    private fun getBottles(cellarOrder: CellarOrder) {
+    private fun getBottles(cellarOrder: CellarOrder, filter: Long? = null) {
         viewModelScope.launch {
-            val bottles = cellarUseCases.getBottles(cellarOrder)
+            val bottles = cellarUseCases.getBottles(cellarOrder, filter)
             _state.value = CellarState(
                 bottles,
-                cellarOrder
+                bottles,
+                cellarOrder,
             )
         }
     }

@@ -1,6 +1,5 @@
 package ch.milog.kavavin_remastered.presentation.cellar
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,8 +14,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
+import ch.milog.kavavin_remastered.R
 import ch.milog.kavavin_remastered.presentation.cellar.components.BottleComponent
 import ch.milog.kavavin_remastered.presentation.cellar.components.TopAppBarComponent
 import ch.milog.kavavin_remastered.ui.theme.primary
@@ -35,6 +36,7 @@ fun CellarScreen(viewModel: CellarViewModel) {
 
     LaunchedEffect(refreshing) {
         if (refreshing) {
+            //too quick without delay, can't see the refresh animation
             delay(500)
             viewModel.onEvent(CellarEvent.Refresh(state.cellarOrder))
             refreshing = false
@@ -43,7 +45,7 @@ fun CellarScreen(viewModel: CellarViewModel) {
 
     Scaffold(
         topBar = {
-            TopAppBarComponent()
+            TopAppBarComponent(viewModel)
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -65,13 +67,21 @@ fun CellarScreen(viewModel: CellarViewModel) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                SwipeRefresh(state = rememberSwipeRefreshState(isRefreshing = refreshing), onRefresh = { refreshing = true }) {
-                    LazyColumn(modifier = Modifier
-                        .padding(8.dp, 0.dp)
-                        .fillMaxSize()) {
-                        items(state.bottles) { bottle ->
-                            BottleComponent(bottle)
-                            Divider()
+                if (state.bottles.isEmpty()) {
+                    Text(text = stringResource(id = R.string.no_bottles))
+                } else {
+                    SwipeRefresh(
+                        state = rememberSwipeRefreshState(isRefreshing = refreshing),
+                        onRefresh = { refreshing = true }) {
+                        LazyColumn(
+                            modifier = Modifier
+                                .padding(8.dp, 0.dp)
+                                .fillMaxSize()
+                        ) {
+                            items(state.bottles) { bottle ->
+                                BottleComponent(bottle)
+                                Divider()
+                            }
                         }
                     }
                 }
