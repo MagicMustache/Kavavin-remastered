@@ -18,4 +18,5 @@
     <string name="champagne">Mousseux</string>
     <string name="miscWine">Vins divers</string>
     <string name="all">Toutes les bouteilles</string>
+    <string name="addBottle">Ajouter une bouteille</string>
 </resources>

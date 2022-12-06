@@ -46,7 +46,6 @@ class CellarViewModel(private val cellarUseCases: CellarUseCases) : ViewModel() 
             val bottles = cellarUseCases.getBottles(cellarOrder, filter)
             _state.value = CellarState(
                 bottles,
-                bottles,
                 cellarOrder,
             )
         }

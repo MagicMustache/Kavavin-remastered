@@ -15,5 +15,5 @@ data class Bottle(
     val price: Long? = null,
     val producer: String? = null,
     var quantity: Long,
-    var userId: String
+    var userId: String? = null,
 ) : Parcelable
