@@ -4,6 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import ch.milog.kavavin_remastered.presentation.add_bottle.AddBottleScreen
+import ch.milog.kavavin_remastered.presentation.add_bottle.AddBottleViewModel
 import ch.milog.kavavin_remastered.presentation.cellar.CellarScreen
 import ch.milog.kavavin_remastered.presentation.cellar.CellarViewModel
 import ch.milog.kavavin_remastered.presentation.signin.LoginScreen
@@ -15,45 +20,18 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
     private val cellarViewModel: CellarViewModel by inject()
+    private val addBottleViewModel: AddBottleViewModel by inject()
     private val auth = Firebase.auth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val currentUser = auth.currentUser
-        if (currentUser == null) {
-            setContent {
-                KavavinRemasteredTheme {
-                    LoginScreen({ loginSuccess(it) }, loginFailure())
-                }
-            }
-        } else {
-            setContent {
-                KavavinRemasteredTheme {
-                    CellarScreen(cellarViewModel)
-                }
+        setContent {
+            KavavinRemasteredTheme {
+                NavHostController(cellarViewModel, addBottleViewModel, auth, this)
             }
         }
     }
 
-    private fun loginSuccess(token: String) {
-        val firebaseCredential = GoogleAuthProvider.getCredential(token, null)
-        auth.signInWithCredential(firebaseCredential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    setContent {
-                        KavavinRemasteredTheme {
-                            CellarScreen(cellarViewModel)
-                        }
-                    }
-                } else {
-                    Log.d("login", "fail")
-                }
-            }
-    }
 
-    private fun loginFailure() {
-        Log.d("login", "fail2")
-    }
 
 }

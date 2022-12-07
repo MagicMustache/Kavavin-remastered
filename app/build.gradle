@@ -89,9 +89,6 @@ dependencies {
     implementation "io.insert-koin:koin-androidx-compose:$koin_android_compose_version"
 
     //Utils
-    implementation 'com.hbb20:android-country-picker:0.0.7'
-    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.10'
-    implementation 'com.google.code.gson:gson:2.10'
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.27.0"
     implementation 'com.github.stevdza-san:OneTapCompose:1.0.0'
     implementation 'com.google.accompanist:accompanist-swiperefresh:0.24.13-rc'

@@ -14,6 +14,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import ch.milog.kavavin_remastered.R
 import com.stevdzasan.onetap.OneTapSignInWithGoogle
 import com.stevdzasan.onetap.rememberOneTapSignInState
@@ -22,6 +25,7 @@ import com.stevdzasan.onetap.rememberOneTapSignInState
 fun LoginScreen(onSucess: (token: String) -> Unit, onError: Unit) {
     val context = LocalContext.current
     val state = rememberOneTapSignInState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
