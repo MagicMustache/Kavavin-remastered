@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import ch.milog.kavavin_remastered.domain.model.Bottle
-import ch.milog.kavavin_remastered.domain.use_cases.AddBottleUseCases
+import ch.milog.kavavin_remastered.domain.useCases.AddBottleUseCases
 
 class AddBottleViewModel(private val addBottleUseCases: AddBottleUseCases) : ViewModel() {
 
@@ -92,30 +92,39 @@ class AddBottleViewModel(private val addBottleUseCases: AddBottleUseCases) : Vie
                     )
                 }
             }
+
             is AddBottleEvent.NameChanged -> {
                 _name.value = _name.value.copy(text = event.name)
             }
+
             is AddBottleEvent.YearChanged -> {
                 _year.value = _year.value.copy(text = event.year)
             }
+
             is AddBottleEvent.CountryChanged -> {
                 _country.value = _country.value.copy(text = event.country)
             }
+
             is AddBottleEvent.RegionChanged -> {
                 _region.value = _region.value.copy(text = event.region)
             }
+
             is AddBottleEvent.GrapesChanged -> {
                 _grapes.value = _grapes.value.copy(text = event.grapes)
             }
+
             is AddBottleEvent.ProducerChanged -> {
                 _producer.value = _producer.value.copy(text = event.producer)
             }
+
             is AddBottleEvent.TypeChanged -> {
                 _type.value = _type.value.copy(text = event.type)
             }
+
             is AddBottleEvent.QuantityChanged -> {
                 _quantity.value = _quantity.value.copy(text = event.quantity)
             }
+
             is AddBottleEvent.PriceChanged -> {
                 _price.value = _price.value.copy(text = event.price)
             }

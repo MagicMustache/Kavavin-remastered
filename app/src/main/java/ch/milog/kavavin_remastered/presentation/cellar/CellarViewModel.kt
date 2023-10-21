@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ch.milog.kavavin_remastered.domain.use_cases.CellarUseCases
+import ch.milog.kavavin_remastered.domain.useCases.CellarUseCases
 import ch.milog.kavavin_remastered.domain.utils.CellarOrder
 import ch.milog.kavavin_remastered.domain.utils.OrderType
 import kotlinx.coroutines.launch
@@ -26,15 +26,19 @@ class CellarViewModel(private val cellarUseCases: CellarUseCases) : ViewModel() 
                 }
                 getBottles(event.order)
             }
+
             is CellarEvent.BottleUpdated -> {
                 cellarUseCases.updateBottle(event.bottle)
             }
+
             is CellarEvent.BottleDeleted -> {
                 cellarUseCases.deleteBottle(event.bottle)
             }
+
             is CellarEvent.Refresh -> {
                 getBottles(event.order)
             }
+
             is CellarEvent.FilteredBottles -> {
                 getBottles(event.order, event.filter)
             }

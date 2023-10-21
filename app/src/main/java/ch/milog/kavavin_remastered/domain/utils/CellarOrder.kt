@@ -22,11 +22,13 @@ sealed class CellarOrder(val orderType: OrderType) {
                         return newOrder.copy(orderType = oldType.reverseType())
                     }
                 }
+
                 is Year -> {
                     if (newOrder is Year) {
                         return newOrder.copy(orderType = oldType.reverseType())
                     }
                 }
+
                 is Quantity -> {
                     if (newOrder is Quantity) {
                         return newOrder.copy(orderType = oldType.reverseType())

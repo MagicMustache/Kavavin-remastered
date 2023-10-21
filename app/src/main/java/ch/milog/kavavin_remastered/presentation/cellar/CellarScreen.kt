@@ -32,6 +32,7 @@ fun CellarScreen(viewModel: CellarViewModel, navController: NavController) {
     LaunchedEffect(refreshing) {
         if (refreshing) {
             //too quick without delay, can't see the refresh animation
+            //TODO: find a better way to do this
             delay(500)
             viewModel.onEvent(CellarEvent.Refresh(state.cellarOrder))
             refreshing = false

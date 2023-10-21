@@ -1,19 +1,11 @@
 package ch.milog.kavavin_remastered
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import ch.milog.kavavin_remastered.presentation.add_bottle.AddBottleScreen
 import ch.milog.kavavin_remastered.presentation.add_bottle.AddBottleViewModel
-import ch.milog.kavavin_remastered.presentation.cellar.CellarScreen
 import ch.milog.kavavin_remastered.presentation.cellar.CellarViewModel
-import ch.milog.kavavin_remastered.presentation.signin.LoginScreen
 import ch.milog.kavavin_remastered.ui.theme.KavavinRemasteredTheme
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import org.koin.android.ext.android.inject
@@ -31,7 +23,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
 
 
 }

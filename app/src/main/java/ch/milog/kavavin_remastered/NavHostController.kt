@@ -28,7 +28,7 @@ fun NavHostController(
         startDestination = "cellar"
     ) {
         composable("login") { LoginScreen({ loginSuccess(it, auth, context, navController) }, loginFailure(context)) }
-        composable("cellar") { CellarScreen(viewModel = cellarViewModel, navController)}
+        composable("cellar") { CellarScreen(viewModel = cellarViewModel, navController) }
         composable("add") { AddBottleScreen(viewModel = addBottleViewModel, navController) }
     }
     if (auth.currentUser == null) {

@@ -11,7 +11,7 @@ import kotlin.coroutines.suspendCoroutine
 class BottleRepositoryImpl : BottleRepository {
 
     private val db = Firebase.firestore
-    val currentUser = Firebase.auth.currentUser
+    private val currentUser = Firebase.auth.currentUser
 
     override suspend fun getBottles(filter: Long?): List<Bottle> {
         return suspendCoroutine {

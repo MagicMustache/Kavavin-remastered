@@ -84,3 +84,6 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 app/google-services.json
+gradle
+gradle.properties
+.idea
